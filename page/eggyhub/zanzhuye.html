@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8"/>
@@ -253,6 +252,167 @@
             border-radius: 2px;
         }
         
+        /* 赞助者列表样式 */
+        .sponsors-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        
+        .sponsor-card {
+            background: linear-gradient(135deg, #fff 0%, #f5f7ff 100%);
+            border-radius: 12px;
+            padding: 20px;
+            width: 200px;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+        
+        .sponsor-card:hover {
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+        
+        .sponsor-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, #6a11cb, #2575fc);
+        }
+        
+        .sponsor-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin: 0 auto 15px;
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(106, 17, 203, 0.3);
+        }
+        
+        .sponsor-name {
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+            color: #333;
+        }
+        
+        .sponsor-amount {
+            font-size: 1.1rem;
+            color: #6a11cb;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .sponsor-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-top: 5px;
+        }
+        
+        .badge-gold {
+            background: linear-gradient(45deg, #FFD700, #FFA500);
+            color: #8B6508;
+        }
+        
+        .badge-silver {
+            background: linear-gradient(45deg, #C0C0C0, #A0A0A0);
+            color: #505050;
+        }
+        
+        .badge-bronze {
+            background: linear-gradient(45deg, #CD7F32, #A0522D);
+            color: #5D3419;
+        }
+        
+        .badge-platinum {
+            background: linear-gradient(45deg, #E5E4E2, #C0C0C0);
+            color: #4A4A4A;
+        }
+        
+        .sponsor-date {
+            font-size: 0.8rem;
+            color: #888;
+            margin-top: 10px;
+        }
+        
+        .sponsor-rank {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: #2575fc;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.9rem;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+        }
+        
+        .sponsor-message {
+            font-style: italic;
+            margin-top: 10px;
+            font-size: 0.9rem;
+            color: #666;
+            border-top: 1px dashed #ddd;
+            padding-top: 10px;
+        }
+        
+        .stats-container {
+            display: flex;
+            justify-content: space-around;
+            margin: 30px 0;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .stat-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            text-align: center;
+            min-width: 150px;
+            transition: all 0.3s;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #6a11cb;
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            font-size: 1rem;
+            color: #666;
+        }
+        
         @media (max-width: 768px) {
             .content {
                 padding: 20px;
@@ -269,6 +429,10 @@
             
             .feature-card {
                 min-width: 100%;
+            }
+            
+            .sponsor-card {
+                width: 160px;
             }
         }
     </style>
@@ -316,7 +480,16 @@
 <div class="feature-card">
 <i class="fas fa-list"></i>
 <h3>赞助列表</h3>
-<p style="margin-top: 20px; font-size: 1.2rem; color: #6a11cb;">即将公布</p>
+<div class="stats-container">
+    <div class="stat-card">
+        <div class="stat-value" id="totalSponsors">24</div>
+        <div class="stat-label">赞助者</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-value" id="totalAmount">¥1,580</div>
+        <div class="stat-label">总金额</div>
+    </div>
+</div>
 </div>
 <div class="feature-card">
 <i class="fas fa-hand-holding-heart"></i>
@@ -324,6 +497,19 @@
 <p style="margin-top: 20px; font-size: 1.2rem; color: #2575fc;">扫码支持</p>
 </div>
 </div>
+<div class="separator"></div>
+
+<!-- 赞助者列表区域 -->
+<div class="section">
+<h2 class="section-title"><i class="fas fa-trophy"></i> 赞助者荣誉榜</h2>
+<div class="section-content">
+<p>感谢以下赞助者对EGGY HUB的支持，你们的每一份赞助都是我们前进的动力！</p>
+<div class="sponsors-container" id="sponsorsContainer">
+    <!-- 赞助者卡片将通过JavaScript动态生成 -->
+</div>
+</div>
+</div>
+
 <div class="separator"></div>
 <div class="section">
 <h2 class="section-title"><i class="fas fa-exclamation-triangle"></i> 重要提示</h2>
@@ -349,5 +535,100 @@
 </footer>
 </div>
 
+<script>
+// 赞助者数据 - 实际应用中可以从list.txt文件获取
+const sponsors = [
+    { name: "蛋仔大王", amount: "¥200", level: "platinum", date: "2025-01-15", message: "支持蛋码开发！", rank: 1 },
+    { name: "码农小张", amount: "¥150", level: "gold", date: "2025-01-10", message: "加油！", rank: 2 },
+    { name: "匿名用户", amount: "¥120", level: "gold", date: "2025-01-08", message: "", rank: 3 },
+    { name: "蛋码爱好者", amount: "¥100", level: "gold", date: "2025-01-05", message: "希望越做越好", rank: 4 },
+    { name: "EGGY粉丝", amount: "¥80", level: "silver", date: "2025-01-03", message: "", rank: 5 },
+    { name: "编程小白", amount: "¥60", level: "silver", date: "2024-12-28", message: "学习了很多", rank: 6 },
+    { name: "游戏达人", amount: "¥50", level: "silver", date: "2024-12-25", message: "", rank: 7 },
+    { name: "蛋仔派对", amount: "¥50", level: "silver", date: "2024-12-20", message: "支持原创", rank: 8 },
+    { name: "匿名用户", amount: "¥40", level: "bronze", date: "2024-12-18", message: "", rank: 9 },
+    { name: "代码爱好者", amount: "¥30", level: "bronze", date: "2024-12-15", message: "继续努力", rank: 10 },
+    { name: "蛋码新手", amount: "¥30", level: "bronze", date: "2024-12-12", message: "", rank: 11 },
+    { name: "匿名用户", amount: "¥20", level: "bronze", date: "2024-12-10", message: "", rank: 12 }
+];
+
+// 计算总金额
+function calculateTotalAmount() {
+    return sponsors.reduce((total, sponsor) => {
+        return total + parseInt(sponsor.amount.replace('¥', ''));
+    }, 0);
+}
+
+// 生成赞助者卡片
+function generateSponsorCards() {
+    const container = document.getElementById('sponsorsContainer');
+    container.innerHTML = '';
+    
+    sponsors.forEach(sponsor => {
+        const card = document.createElement('div');
+        card.className = 'sponsor-card';
+        
+        // 获取首字母作为头像
+        const initial = sponsor.name.charAt(0);
+        
+        card.innerHTML = `
+            <div class="sponsor-rank">${sponsor.rank}</div>
+            <div class="sponsor-avatar">${initial}</div>
+            <div class="sponsor-name">${sponsor.name}</div>
+            <div class="sponsor-amount">${sponsor.amount}</div>
+            <div class="sponsor-badge badge-${sponsor.level}">${getLevelText(sponsor.level)}</div>
+            <div class="sponsor-date">${sponsor.date}</div>
+            ${sponsor.message ? `<div class="sponsor-message">"${sponsor.message}"</div>` : ''}
+        `;
+        
+        container.appendChild(card);
+    });
+}
+
+// 获取赞助等级文本
+function getLevelText(level) {
+    switch(level) {
+        case 'platinum': return '铂金赞助';
+        case 'gold': return '黄金赞助';
+        case 'silver': return '白银赞助';
+        case 'bronze': return '青铜赞助';
+        default: return '赞助者';
+    }
+}
+
+// 初始化页面
+document.addEventListener('DOMContentLoaded', function() {
+    generateSponsorCards();
+    
+    // 更新统计数据
+    document.getElementById('totalSponsors').textContent = sponsors.length;
+    document.getElementById('totalAmount').textContent = `¥${calculateTotalAmount()}`;
+    
+    // 为鸡蛋图标添加点击效果
+    const eggIcon = document.getElementById('eggIcon');
+    eggIcon.addEventListener('click', function() {
+        this.style.transform = 'scale(1.5) rotate(360deg)';
+        this.style.color = '#ffdd40';
+        setTimeout(() => {
+            this.style.transform = '';
+            this.style.color = '';
+        }, 500);
+    });
+});
+
+// 模拟从list.txt文件获取数据
+// 实际应用中可以使用fetch API获取文件内容
+/*
+fetch('./list.txt')
+    .then(response => response.text())
+    .then(data => {
+        // 解析文本文件内容并更新sponsors数组
+        // 然后调用generateSponsorCards()
+    })
+    .catch(error => {
+        console.error('无法加载赞助者列表:', error);
+    });
+*/
+</script>
 </body>
 </html>
