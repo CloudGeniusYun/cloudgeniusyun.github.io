@@ -82,7 +82,7 @@ h1 {
     display: flex;
     flex-direction: column;
     position: relative;
-    min-height: 180px; /* 确保有足够空间放置按钮 */
+    min-height: 180px;
 }
 
 .group-name {
@@ -121,7 +121,7 @@ h1 {
 }
 
 .group-action {
-    margin-top: auto; /* 将按钮推到内容区域底部 */
+    margin-top: auto;
     text-align: right;
 }
 
@@ -140,6 +140,13 @@ h1 {
 
 .join-btn:hover {
     background-color: #0d62d9;
+}
+
+/* 修改后的禁用按钮样式 - 浅蓝色偏灰 */
+.join-btn:disabled {
+    background-color: #e6f0ff; /* 非常浅的蓝色 */
+    color: #a8c7fa; /* 浅蓝色文字 */
+    cursor: not-allowed;
 }
 
 /* 宽屏模式 - 卡片宽度为页面一半 */
@@ -162,11 +169,11 @@ h1 {
     }
     
     .group-content {
-        min-height: auto; /* 移动端不需要固定高度 */
+        min-height: auto;
     }
     
     .group-action {
         margin-top: 15px;
-        text-align: center; /* 移动端居中显示按钮 */
+        text-align: center;
     }
 }
