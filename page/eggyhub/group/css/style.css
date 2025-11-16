@@ -147,6 +147,9 @@ h1 {
     background-color: #e6f0ff; /* 非常浅的蓝色 */
     color: #a8c7fa; /* 浅蓝色文字 */
     cursor: not-allowed;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 14px;
     /*border: 1px solid #d1e3ff;  浅蓝色边框 */
     pointer-events: none; /* 阻止所有鼠标事件 */
 }
