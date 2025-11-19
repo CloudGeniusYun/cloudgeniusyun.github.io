@@ -433,13 +433,14 @@ section {
     width: 30px;
 }
 
-/* 管理员名片样式 - 横版设计 */
+/* 管理员名片样式 - 基于成功案例的横版设计 */
 .admin-section {
     background: var(--card-bg);
     border-radius: 10px;
     padding: 2rem;
     backdrop-filter: blur(10px);
     border: 1px solid rgba(0, 247, 255, 0.1);
+    margin-top: 2rem;
 }
 
 .admin-section-title {
@@ -461,21 +462,20 @@ section {
 }
 
 .admin-cards-container {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
 }
 
 .admin-card {
     background: rgba(10, 15, 35, 0.5);
-    border-radius: 10px;
-    padding: 1.5rem;
+    border-radius: 12px;
+    padding: 20px;
     backdrop-filter: blur(10px);
     border: 1px solid rgba(0, 247, 255, 0.1);
-    transition: var(--transition);
+    transition: transform 0.2s, box-shadow 0.2s;
     display: flex;
-    align-items: flex-start;
-    gap: 1.5rem;
+    width: 100%;
 }
 
 .admin-card:hover {
@@ -487,11 +487,13 @@ section {
 .admin-avatar {
     width: 80px;
     height: 80px;
-    border-radius: 50%;
+    border-radius: 12px;
     overflow: hidden;
+    margin-right: 20px;
+    flex-shrink: 0;
+    align-self: flex-start;
     border: 2px solid var(--primary);
     box-shadow: var(--glow);
-    flex-shrink: 0;
 }
 
 .admin-avatar img {
@@ -502,18 +504,20 @@ section {
 
 .admin-info {
     flex: 1;
-    text-align: left;
+    display: flex;
+    flex-direction: column;
+    position: relative;
 }
 
 .admin-info h4 {
     color: var(--primary);
-    margin-bottom: 0.5rem;
+    margin-bottom: 5px;
     font-size: 1.2rem;
 }
 
 .admin-info h5 {
     color: var(--secondary);
-    margin-bottom: 0.8rem;
+    margin-bottom: 8px;
     font-size: 1rem;
     font-weight: 400;
 }
@@ -522,6 +526,34 @@ section {
     color: rgba(224, 224, 255, 0.8);
     font-size: 0.9rem;
     line-height: 1.5;
+    margin-bottom: 12px;
+}
+
+/* 宽屏模式 - 卡片宽度为页面一半 */
+@media (min-width: 768px) {
+    .admin-card {
+        width: calc(50% - 10px);
+    }
+}
+
+/* 窄屏模式 - 卡片全宽，垂直布局 */
+@media (max-width: 767px) {
+    .admin-card {
+        flex-direction: column;
+    }
+
+    .admin-avatar {
+        margin-right: 0;
+        margin-bottom: 15px;
+        align-self: center;
+    }
+}
+
+/* 更宽屏幕 - 三列布局 */
+@media (min-width: 1200px) {
+    .admin-card {
+        width: calc(33.333% - 14px);
+    }
 }
 
 /* Footer */
@@ -576,7 +608,7 @@ footer::before {
     font-size: 0.9rem;
 }
 
-/* Responsive Design */
+/* 其他响应式设计 */
 @media (max-width: 768px) {
     .hero {
         grid-template-columns: 1fr;
@@ -593,27 +625,5 @@ footer::before {
 
     .contact-container {
         grid-template-columns: 1fr;
-    }
-    
-    .admin-card {
-        flex-direction: column;
-        text-align: center;
-        gap: 1rem;
-    }
-    
-    .admin-info {
-        text-align: center;
-    }
-}
-
-@media (min-width: 769px) {
-    .admin-cards-container {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media (min-width: 1025px) {
-    .admin-cards-container {
-        grid-template-columns: repeat(3, 1fr);
     }
 }
