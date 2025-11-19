@@ -398,6 +398,7 @@ section {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2rem;
+    margin-bottom: 3rem;
 }
 
 .contact-info {
@@ -432,7 +433,7 @@ section {
     width: 30px;
 }
 
-/* 管理员名片样式 */
+/* 管理员名片样式 - 横版设计 */
 .admin-section {
     background: var(--card-bg);
     border-radius: 10px;
@@ -441,15 +442,15 @@ section {
     border: 1px solid rgba(0, 247, 255, 0.1);
 }
 
-.admin-section h3 {
+.admin-section-title {
     color: var(--primary);
     margin-bottom: 1.5rem;
-    font-size: 1.3rem;
+    font-size: 1.5rem;
     position: relative;
     display: inline-block;
 }
 
-.admin-section h3::after {
+.admin-section-title::after {
     content: '';
     position: absolute;
     bottom: -8px;
@@ -461,7 +462,7 @@ section {
 
 .admin-cards-container {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
     gap: 1.5rem;
 }
 
@@ -473,9 +474,8 @@ section {
     border: 1px solid rgba(0, 247, 255, 0.1);
     transition: var(--transition);
     display: flex;
-    flex-direction: column;
     align-items: center;
-    text-align: center;
+    gap: 1.5rem;
 }
 
 .admin-card:hover {
@@ -485,19 +485,24 @@ section {
 }
 
 .admin-avatar {
-    width: 100px;
-    height: 100px;
+    width: 80px;
+    height: 80px;
     border-radius: 50%;
     overflow: hidden;
-    margin-bottom: 1rem;
     border: 2px solid var(--primary);
     box-shadow: var(--glow);
+    flex-shrink: 0;
 }
 
 .admin-avatar img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+}
+
+.admin-info {
+    flex: 1;
+    text-align: left;
 }
 
 .admin-info h4 {
@@ -508,7 +513,7 @@ section {
 
 .admin-info h5 {
     color: var(--secondary);
-    margin-bottom: 1rem;
+    margin-bottom: 0.8rem;
     font-size: 1rem;
     font-weight: 400;
 }
@@ -593,6 +598,16 @@ footer::before {
     .admin-cards-container {
         grid-template-columns: 1fr;
     }
+    
+    .admin-card {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+    }
+    
+    .admin-info {
+        text-align: center;
+    }
 }
 
 @media (min-width: 769px) and (max-width: 1024px) {
@@ -603,6 +618,13 @@ footer::before {
 
 @media (min-width: 1025px) {
     .admin-cards-container {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    /* 在特别宽的屏幕上显示三列 */
+    @media (min-width: 1400px) {
+        .admin-cards-container {
+            grid-template-columns: repeat(3, 1fr);
+        }
     }
 }
