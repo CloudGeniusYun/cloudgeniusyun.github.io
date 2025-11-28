@@ -35,8 +35,8 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // 设置多个备用音乐源
     const musicSources = [
-
-        'https://eggyhub.top/api/repos/2/background.mp3', // 在线源1
+        'https://cdn.pixabay.com/download/audio/2022/03/15/audio_2f552359a8.mp3?filename=ambient-piano-amp-strings-120799.mp3', // 在线源1
+        'https://cdn.pixabay.com/download/audio/2022/01/18/audio_5b735208a3.mp3?filename=cinematic-ambient-116199.mp3', // 在线源2
         './music/background.mp3' // 本地备用
     ];
     
@@ -89,8 +89,9 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log('音乐播放成功');
         }).catch(error => {
             console.log('播放被阻止:', error);
-            // 显示提示信息
-            musicToggle.innerHTML = '<i class="fas fa-volume-mute"></i>';
+            // 修正：显示播放图标，表示可以手动播放
+            musicToggle.innerHTML = '<i class="fas fa-play"></i>';
+            isPlaying = false;
             
             // 如果是因为用户交互要求，尝试再次播放
             if (error.name === 'NotAllowedError') {
@@ -194,12 +195,16 @@ document.addEventListener('DOMContentLoaded', function() {
             // 页面隐藏时暂停音乐
             if (isPlaying) {
                 bgMusic.pause();
+                // 注意：这里不改变图标，因为恢复显示时会重新播放
             }
         } else {
             // 页面重新显示时恢复播放
             if (isPlaying) {
                 bgMusic.play().catch(error => {
                     console.log('恢复播放失败:', error);
+                    // 恢复播放失败时，显示播放图标
+                    musicToggle.innerHTML = '<i class="fas fa-play"></i>';
+                    isPlaying = false;
                 });
             }
         }
