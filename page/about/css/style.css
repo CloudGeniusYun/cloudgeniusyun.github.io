@@ -350,7 +350,7 @@ section {
     top: 0;
     bottom: 0;
     width: 2px;
-    background: linear-gradient(to bottom, var(--primary), var(--secondary));
+    background: linear-gradient(to bottom, transparent 0%, var(--primary) 15%, var(--primary) 85%, transparent 100%);
     transform: translateX(-50%);
 }
 
@@ -358,6 +358,7 @@ section {
     display: flex;
     margin-bottom: 3rem;
     position: relative;
+    align-items: center;
 }
 
 .timeline-item:nth-child(odd) {
@@ -372,15 +373,16 @@ section {
 
 .timeline-date {
     flex: 1;
-    padding: 0 2rem;
+    padding: 0.5rem 1.5rem;
     display: flex;
     align-items: center;
     justify-content: center;
     background: var(--card-bg);
-    padding: 0.5rem 1.5rem;
     border-radius: 20px;
     border: 1px solid rgba(0, 247, 255, 0.3);
     font-weight: 500;
+    z-index: 2;
+    position: relative;
 }
 
 .timeline-content {
@@ -391,6 +393,8 @@ section {
     border: 1px solid rgba(0, 247, 255, 0.1);
     margin-left: 3rem;
     transition: var(--transition);
+    position: relative;
+    z-index: 1;
 }
 
 .timeline-content:hover {
@@ -403,18 +407,19 @@ section {
     margin-bottom: 0.5rem;
 }
 
-/* 修复时间轴圆点样式 */
+/* 修复时间轴圆点样式 - 空心圆点 */
 .timeline-marker {
     position: absolute;
     left: 50%;
     top: 50%;
-    width: 15px;
-    height: 15px;
-    background: var(--primary);
+    width: 20px;
+    height: 20px;
+    background: transparent;
+    border: 2px solid var(--primary);
     border-radius: 50%;
     transform: translate(-50%, -50%);
     box-shadow: 0 0 10px var(--primary);
-    z-index: 2;
+    z-index: 3;
 }
 
 /* Projects Section */
@@ -804,29 +809,41 @@ footer::before {
     background: var(--secondary);
 }
 
-/* 时间轴响应式设计 */
+/* 时间轴响应式设计 - 修复重叠问题 */
 @media (max-width: 768px) {
     .timeline::before {
-        left: 20px;
+        left: 30px;
     }
 
     .timeline-item {
         flex-direction: row !important;
+        padding-left: 40px;
     }
 
     .timeline-item .timeline-content {
-        margin-left: 3rem;
+        margin-left: 0;
         margin-right: 0;
         text-align: left;
+        width: 100%;
     }
 
     .timeline-date {
-        justify-content: flex-start;
-        padding-left: 0;
+        position: absolute;
+        left: -40px;
+        top: 0;
+        width: 80px;
+        justify-content: center;
+        padding: 0.3rem 0.8rem;
+        font-size: 0.8rem;
     }
 
     .timeline-marker {
-        left: 20px;
+        left: 30px;
+        top: 20px;
+    }
+    
+    .timeline-item:nth-child(odd) .timeline-content {
+        text-align: left;
     }
 }
 
