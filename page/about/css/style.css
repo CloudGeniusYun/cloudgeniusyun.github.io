@@ -364,20 +364,20 @@ section {
 
 /* 左侧项目（奇数项）- 向右偏移 */
 .timeline-item:nth-child(odd) {
-    justify-content: flex-start;
+    justify-content: flex-end;
     padding-right: 30%; /* 控制整体向左偏移 */
 }
 
 .timeline-item:nth-child(odd) .timeline-date {
     order: 1;
-    text-align: right;
+    text-align: left;
     margin-right: 2rem;
     flex: 0 0 180px;
 }
 
 .timeline-item:nth-child(odd) .timeline-content {
     order: 2;
-    text-align: left;
+    text-align: right;
     margin-left: 0;
     flex: 1;
     max-width: 500px;
@@ -385,20 +385,20 @@ section {
 
 /* 右侧项目（偶数项）- 向左偏移 */
 .timeline-item:nth-child(even) {
-    justify-content: flex-end;
+    justify-content: flex-start;
     padding-left: 30%; /* 控制整体向右偏移 */
 }
 
 .timeline-item:nth-child(even) .timeline-date {
     order: 2;
-    text-align: left;
+    text-align: right;
     margin-left: 2rem;
     flex: 0 0 180px;
 }
 
 .timeline-item:nth-child(even) .timeline-content {
     order: 1;
-    text-align: right;
+    text-align: left;
     margin-right: 0;
     flex: 1;
     max-width: 500px;
