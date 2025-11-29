@@ -326,11 +326,21 @@ section {
     transform: scale(1.05);
 }
 
-/* Experience Section */
+.skill-item a {
+    color: var(--light);
+    text-decoration: none;
+}
+
+.skill-item a:hover {
+    color: var(--primary);
+}
+
+/* Experience Section - 修复时间轴样式 */
 .timeline {
     position: relative;
     max-width: 800px;
     margin: 0 auto;
+    padding-bottom: 2rem;
 }
 
 .timeline::before {
@@ -340,7 +350,7 @@ section {
     top: 0;
     bottom: 0;
     width: 2px;
-    background: linear-gradient(to bottom, transparent, var(--primary), transparent);
+    background: linear-gradient(to bottom, var(--primary), var(--secondary));
     transform: translateX(-50%);
 }
 
@@ -366,9 +376,6 @@ section {
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-.timeline-date span {
     background: var(--card-bg);
     padding: 0.5rem 1.5rem;
     border-radius: 20px;
@@ -396,6 +403,7 @@ section {
     margin-bottom: 0.5rem;
 }
 
+/* 修复时间轴圆点样式 */
 .timeline-marker {
     position: absolute;
     left: 50%;
@@ -406,6 +414,7 @@ section {
     border-radius: 50%;
     transform: translate(-50%, -50%);
     box-shadow: 0 0 10px var(--primary);
+    z-index: 2;
 }
 
 /* Projects Section */
@@ -515,7 +524,16 @@ section {
     width: 30px;
 }
 
-/* 管理员名片样式 - 基于成功案例的横版设计 */
+.contact-item a {
+    color: var(--light);
+    text-decoration: none;
+}
+
+.contact-item a:hover {
+    color: var(--primary);
+}
+
+/* 管理员名片样式 */
 .admin-section {
     background: var(--card-bg);
     border-radius: 10px;
@@ -628,11 +646,11 @@ section {
     .admin-avatar {
         margin-right: 0;
         margin-bottom: 15px;
-        align-self: center; /* 确保头像在垂直布局中水平居中 */
+        align-self: center;
     }
 
     .admin-info {
-        text-align: center; /* 确保文本在垂直布局中居中 */
+        text-align: center;
     }
 }
 
@@ -791,22 +809,22 @@ footer::before {
     .timeline::before {
         left: 20px;
     }
-    
+
     .timeline-item {
         flex-direction: row !important;
     }
-    
+
     .timeline-item .timeline-content {
         margin-left: 3rem;
         margin-right: 0;
         text-align: left;
     }
-    
+
     .timeline-date {
         justify-content: flex-start;
         padding-left: 0;
     }
-    
+
     .timeline-marker {
         left: 20px;
     }
@@ -830,13 +848,26 @@ footer::before {
     .contact-container {
         grid-template-columns: 1fr;
     }
-    
+
     .music-controls {
         bottom: 10px;
         right: 10px;
     }
-    
+
     .volume-control-container {
         padding: 5px 10px;
     }
+}
+
+/* 可访问性改进 */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+a:focus, button:focus {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
 }
